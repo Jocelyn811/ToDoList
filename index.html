@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no,maximun-scale=1.0;minimun-scale=1.0">
+    <title>Document</title>
+    <link href="base.css" rel="stylesheet" type="text/css"/>
+    
+    
+
+    <style>
+        body{
+            
+            background-image:url("./img/1.jpg");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            width:100%;
+            height:100%;
+            margin:0;
+            background-attachment: fixed;
+        }
+    </style>
+    <script type="text/javascript">
+    //
+    //var pageWidth=window.innerWidth
+    //document.write('<style>html{font-size:'+pageWidth/60+'px;}</style>')
+    function delA(){
+               
+               //删除
+               var tr =this.parentNode.parentNode;
+               //弹出一个带有确认按钮的提示框，字符串作为参数，该字符串会提示文字显示出来
+              var flag= confirm("确认删除吗？");
+               if(flag){
+                   tr.parentNode.removeChild(tr);
+               }
+               
+                return flase;
+
+            };
+        
+    function finA(){
+        
+        var tr =this.parentNode.parentNode;
+        tr.style.color="red";
+
+        
+    };
+    //获取时间
+    function realSysTime(){
+        var now=new Date();
+        var year=now.getFullYear();
+        var month=now.getMonth();
+        var date=now.getDate();
+        var day=now.getDay();
+        var hour=now.getHours();
+        var minu=now.getMinutes();
+        var sec=now.getSeconds();
+        month=month+1;
+        var arr_week=new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+        var week=arr_week[day];
+        var Dates=hour+":"+minu+":"+sec;
+        var Time=year+"-"+month+"-"+date+"-"+week;
+        var obj=document.getElementById("Time");
+        obj.innerHTML=Time;
+        var obj1=document.getElementById("Dates");
+        obj1.innerHTML=Dates;
+
+        //window.setTimeout("realSysTime",1000);
+    };
+    setInterval("realSysTime()",1000);
+    window.onload = function(){
+        //点击超链接以后，删除一个员工的信息
+        //获取所有超链接
+
+        
+        var allA1 =document.getElementsByTagName("a1");
+        //为每个超链接都绑定单击响应
+        for(var i=0;i<allA1.length;i++){
+            allA1[i].onclick=delA;
+        }
+//添加list
+        //var unfinish=document.getElementById("unfinish");
+        var allA=document.getElementsByTagName("a");
+        
+        for(var i=0;i<allA.length;i++){
+            allA[i].onclick=finA;
+        }
+        var Submit=document.getElementById("Submit");
+        Submit.onclick=function(e){
+            e.preventDefault();//防止刷新
+            //获取信息
+            var list=document.getElementById("list").value;
+           /* var Year=document.getElementById("year");
+            var Month=document.getElementById("month");
+            
+            var index=Year.selectedIndex;*/
+            var data=document.getElementById("data").value;
+            //创建tr和td
+            var tr=document.createElement("tr");
+            tr.innerHTML="<td>"+list+"</td>"+
+                         "<td>"+data+"</td>"+
+                         "<td><a href='javascript:;'>完成</a></td>"
+                         +"<td><a1 href='javascript:;'>删除</a1></td>";
+            var a1=tr.getElementsByTagName("a1")[0];
+            var a=tr.getElementsByTagName("a")[0];
+            a1.onclick=delA;
+            a.onclick=finA;
+
+           /* var listTd=document.createElement("td");
+            //var Datas=document.createElement("td");
+            //var finTd=document.createElement("td");
+            var DelTd=document.createElement("td");
+           // var remove=document.createElement("td");
+            var a =document.createElement("a");
+            //创建文本节点
+            var listText=document.createTextNode(Text);
+            //var dataText=document.createTextNode(data);
+            //var finText=document.createTextNode("完成");
+            var delText=document.createTextNode("删除");
+            //var rem=document.createTextNode("修改");
+            listTd.appendChild(listText);
+            //Datas.appendChild(dataText);
+           // a.appendChild(finText);
+            a.appendChild(delText);
+           // a.appendChild(rem);
+            DelTd.appendChild(a);
+            //finTd.appendChild(a);
+           // remove.appendChild(a);
+            //将td添加到tr中
+            tr.appendChild(listTd);
+            //tr.appendChild(Datas);
+            //tr.appendChild(finTd);
+            tr.appendChild(DelTd);
+            //tr.appendChild(remTd);
+            //获取tabel
+
+            a.href="javascript:;";
+            a.onclik=delA;*/
+            var todolist=document.getElementById("todolist");
+            var tbody=todolist.getElementsByTagName("tbody")[0];
+            tbody.appendChild(tr);
+            //显示时间
+           // window.setinterval("realSysTime(t",1000);
+
+
+
+        };
+
+    };
+    </script>
+</head>
+<body >
+    <!--背景-->
+    <div>
+    <div class="background">
+        <div id="time">
+            <div id="Dates"></div>
+            <div id="Time"></div>
+        </div>
+        <div>
+
+        
+            <div class="decorate">
+                <span>To<br>Do<br>List</span>
+            </div>
+            <div class="input">
+                <p>Your&nbsp;New&nbsp;To&nbsp;Do&nbsp;List</p>
+                
+                <form>
+                    <!--用文本框textarea-->
+                    内容：<input type="text" id="list">
+                    <br>
+                    时间：<input type="text" id="data">
+                    <br><br>
+                    <!--截止时间：
+                    <select id="year">
+                        <option>2020</option>
+                        <option>2021</option>
+                    </select>
+                    <span>年</span>
+                    <select id="month">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                    </select>
+                    <span>月</span>
+                    <select id="date">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                        <option>13</option>
+                        <option>14</option>
+                        <option>15</option>
+                        <option>16</option>
+                        <option>17</option>
+                        <option>18</option>
+                        <option>19</option>
+                        <option>20</option>
+                        <option>21</option>
+                        <option>22</option>
+                        <option>23</option>
+                        <option>24</option>
+                        <option>25</option>
+                        <option>26</option>
+                        <option>27</option>
+                        <option>28</option>
+                        <option>29</option>
+                        <option>30</option>
+                        <option>31</option>
+                    </select>
+                    <span>日</span>
+                -->
+                    <input type="submit" value="submit" style="display:block;"id="Submit">
+                </form>
+            </div>
+            <div class="list">
+            <div class="unfinish">
+                <table id="todolist">
+                    <tr>
+                        <td>完成ToDoList</td>
+                        <td>7月20号</td>
+                        <td><a href="javascript:;">完成</a></td>
+                        <td><a1 href="javascript:;">删除</a1></td>
+                        <!-- <td><a href="removeid=1">修改</a></td>-->
+                    </tr>
+                    <tr>
+                        <td>开学</td>
+                        <td>8月30号</td>
+                        <td><a href="javascript:;">完成</a></td>
+                        <td><a1 href="javascript:;">删除</a1></td>
+                        <!--<td><a href="removeid=2">修改</a></td>-->
+
+                    </tr>
+                </table>
+
+            </div>
+            <div class="finished">
+
+
+            </div>
+
+
+            
+        </div>
+        </div>
+    </div>
+        
+    </div>
+    
+</body>
+</html>
